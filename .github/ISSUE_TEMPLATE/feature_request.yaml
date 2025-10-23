@@ -1,0 +1,36 @@
+name: "✨ Feature Request"
+description: "새 기능 추가를 제안합니다."
+title: "[FEATURE] "
+labels: ["feature"]
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: "기능 요약"
+      description: "어떤 기능을 추가하고 싶은가요?"
+      placeholder: "예: 홈페이지 자동 배포 기능"
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "기능 상세 설명"
+      description: "이 기능이 필요한 이유나 구체적인 동작 방식을 적어주세요."
+      placeholder: "예: 사용자가 생성한 HTML을 K-PaaS Object Storage에 업로드 후 자동 배포되도록 한다."
+
+  - type: input
+    id: deadline
+    attributes:
+      label: "예상 완료일"
+      placeholder: "YYYY-MM-DD"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "체크리스트"
+      options:
+        - label: "기획/설계 완료"
+        - label: "개발 진행 중"
+        - label: "로컬 테스트 완료"
+        - label: "리뷰 요청"

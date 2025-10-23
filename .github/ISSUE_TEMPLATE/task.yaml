@@ -1,0 +1,35 @@
+name: "🧱 Task"
+description: "일반 개발, 문서, 리팩터링 등의 작업을 등록합니다."
+title: "[TASK] "
+labels: ["task"]
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: "작업 요약"
+      placeholder: "예: README 구조 개편"
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "작업 상세 설명"
+      description: "이 작업의 목적과 구체적인 수행 내용을 입력하세요."
+      placeholder: "예: 프로젝트 소개, 기술 스택, 실행 가이드 정리"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "작업 단계"
+      options:
+        - label: "할 일 정의"
+        - label: "진행 중"
+        - label: "완료됨"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "우선순위"
+      options:
+        - "🔴 High"
+        - "🟠 Medium"
+        - "🟢 Low"
