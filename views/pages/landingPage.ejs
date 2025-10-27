@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- head.ejs 파셜을 포함합니다. -->
+    <%- include('../partials/head', { title: page.title }) %>
+</head>
+<body class="<%= theme.bodyClass %> min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- 1. 헤더 -->
+    <%- include('../partials/header', { theme: theme, page: page }) %>
+
+    <!-- 
+      [수정됨]
+      <main>과 <footer>를 묶는 <div> 래퍼(wrapper)를 추가했습니다.
+      - 'flex-grow': 이 <div>가 헤더를 제외한 모든 남은 세로 공간을 차지합니다.
+      - 'justify-center': 이 <div> 안의 자식 요소(<main>과 <footer>)를
+                         세로로 중앙 정렬합니다.
+    -->
+    <div class="flex-grow flex flex-col justify-center items-center">
+
+        <!-- 2. 메인 콘텐츠 -->
+        <!-- 
+          [수정됨]
+          이전 'flex-grow'는 제거된 상태를 유지합니다.
+          padding-top을 'py-10'에서 'pt-20'으로 늘려서
+          헤더와의 최소 간격을 확보합니다.
+        -->
+        <main class="flex flex-col items-center justify-center text-center px-4 pt-20 pb-10">
+            
+            <!-- 환영 메시지 -->
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r <%= theme.headingGradient %>">
+                    <%= page.heading %>
+                </span>
+            </h1>
+            
+            <!-- 소개글 -->
+            <p class="text-lg md:text-xl max-w-xl mb-8 <%= theme.subtextClass %>">
+                <%= page.subtext %>
+            </p>
+
+        </main>
+
+        <!-- 3. 푸터 (폼 포함) -->
+        <%- include('../partials/footer', { theme: theme, page: page }) %>
+
+    </div> <!-- [수정됨] 래퍼 <div> 종료 -->
+
+    <!-- 4. 스크립트 -->
+    <%- include('../partials/scripts') %>
+</body>
+</html>
+
