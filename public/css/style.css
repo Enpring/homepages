@@ -1,0 +1,4 @@
+/* Inter 폰트 (또는 기본 sans-serif)를 기본으로 설정 */
+body {
+    font-family: 'Inter', sans-serif;
+}
