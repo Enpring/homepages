@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitButton = document.getElementById('notify-button');
     const buttonText = document.getElementById('button-text');
     const buttonLoading = document.getElementById('button-loading');
-    const formMessage = document.getElementById('form-message');
+    const formMessage = document.getElementById('message-area');
 
     // 폼이나 인풋이 존재하지 않으면 스크립트를 종료합니다.
     if (!notifyForm || !emailInput || !submitButton) {
@@ -49,18 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {boolean} isLoading - 로딩 중인지 여부
      */
     function setFormLoading(isLoading) {
-        if (isLoading) {
-            submitButton.disabled = true; // 로딩 중에는 비활성화
-            buttonText.classList.add('hidden'); // '알림 받기' 텍스트 숨기기
-            buttonLoading.classList.remove('hidden'); // '보내는 중...' 텍스트 보이기
-            emailInput.disabled = true; // 입력창 비활성화
-        } else {
-            submitButton.disabled = false; // 로딩 완료 후 활성화
-            buttonText.classList.remove('hidden');
-            buttonLoading.classList.add('hidden');
-            emailInput.disabled = false;
-        }
+    if (isLoading) {
+        submitButton.disabled = true;
+        submitButton.textContent = '보내는 중...';
+        emailInput.disabled = true;
+    } else {
+        submitButton.disabled = false;
+        submitButton.textContent = '알림 받기';
+        emailInput.disabled = false;
     }
+}
 
     /**
      * 사용자에게 피드백 메시지를 보여줍니다.
@@ -105,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // API 엔드포인트
-            const API_URL = 'https://localhost:8080/email/';
+            const API_URL = 'http://localhost:8080/subscription/';
             
             const response = await fetch(API_URL, {
                 method: 'POST',
@@ -114,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({
                     email: email,
-                    domain: domainName // [수정됨] 서버에서 받은 페이지 식별자 전송
+                    domain: pageName // [수정됨] 서버에서 받은 페이지 식별자 전송
                 }),
             });
 
