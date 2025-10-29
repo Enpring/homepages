@@ -1,37 +1,71 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- head.ejs 파셜을 포함합니다. -->
-    <%- include('../partials/head', { title: page.title }) %>
+    <%- include('../partials/head') %>
 </head>
-<body class="<%= theme.bodyClass %> min-h-screen flex flex-col font-sans antialiased">
+<body>
+    <!-- 
+      min-h-screen: 최소 화면 높이 100%
+      flex flex-col: 자식 요소(헤더, 메인 래퍼)를 세로로 배치
+      items-center: 가로 중앙 정렬
+      
+      [수정됨] 
+      배경색 스타일을 이 최상위 div로 이동시켰습니다.
+      이제 배경색이 화면 전체에 적용됩니다.
+    -->
+    <div 
+      class="min-h-screen w-full flex flex-col items-center"
+      style="background-color: <%= theme.backgroundColor %>;"
+    >
 
-    <!-- 1. 헤더 -->
-    <%- include('../partials/header', { theme: theme, page: page }) %>
+        <!-- 1. 헤더 (로고) -->
+        <%- include('../partials/header') %>
 
-    <div class="flex-grow flex flex-col justify-center items-center">
-        <main class="flex flex-col items-center justify-center text-center px-4 pt-20 pb-10">
+        <!-- 
+          메인 콘텐츠와 푸터를 감싸는 래퍼
+          - flex-grow: 헤더를 제외한 모든 남은 공간을 차지
+          - justify-center: 내용물을 세로 중앙에 배치
+          - items-center: 내용물을 가로 중앙에 배치
+          
+          [수정됨] 
+          여기 있던 배경색 style 속성을 제거했습니다.
+          이제 이 div는 투명하지만, 헤더/푸터와 너비(max-w-lg)를 맞추는
+          '콘텐츠 정렬' 역할만 합니다.
+        -->
+        <div 
+          class="flex-grow w-full max-w-lg mx-auto flex flex-col justify-center items-center p-4" 
+        >
+            <!-- 2. 메인 콘텐츠 (환영 메시지) -->
+            <main class="text-center w-full pb-10">
+                <!-- 
+                  - 제목 텍스트: page.title
+                  - 제목 색상: theme.titleColor
+                -->
+                <h1 
+                  class="text-5xl md:text-6xl font-bold tracking-tight" 
+                  style="color: <%= theme.titleColor %>;"
+                >
+                  <%= page.title %>
+                </h1>
+                <!-- 
+                  - 설명 텍스트: page.description
+                  - 설명 색상: theme.descriptionColor
+                -->
+                <p 
+                  class="mt-6 text-lg leading-8 max-w-md mx-auto"
+                  style="color: <%= theme.descriptionColor %>;"
+                >
+                  <%= page.description %>
+                </p>
+            </main>
+    
+            <!-- 3. 푸터 (이메일 폼) -->
+            <%- include('../partials/footer') %>
+        </div>
 
-            <!-- 환영 메시지 -->
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r <%= theme.headingGradient %>">
-                    <%= page.title %>
-                </span>
-            </h1>
+    </div>
 
-            <!-- 소개글 -->
-            <p class="text-lg md:text-xl max-w-xl mb-8 <%= theme.subtextClass %>">
-                <%= page.description %>
-            </p>
-
-        </main>
-
-        <!-- 3. 푸터 (폼 포함) -->
-        <%- include('../partials/footer', { theme: theme, page: page }) %>
-
-    </div> <!-- [수정됨] 래퍼 <div> 종료 -->
-
-    <!-- 4. 스크립트 -->
+    <!-- 공통 스크립트 -->
     <%- include('../partials/scripts') %>
 </body>
 </html>
