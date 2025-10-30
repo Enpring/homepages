@@ -5,7 +5,7 @@ const pageData = {
     page: {
         title: "Coming Soon",
         description: "페이지가 준비 중입니다. 이메일을 등록하고 가장 먼저 업데이트를 확인하세요.",
-        domainName: "yourpage.com",
+        domainName: "example.com",
         logoPathName: "/image.png"
     },
     theme: {
