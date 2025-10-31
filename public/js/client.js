@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // API 엔드포인트
-            const API_URL = 'http://localhost:8080/subscription/';
+            const API_URL = 'http://default-enstart-back-ema-df1f5-112414483-6eff766d0525.kr.lb.naverncp.com/subscription/';
             
             const response = await fetch(API_URL, {
                 method: 'POST',
